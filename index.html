@@ -210,56 +210,172 @@
         }
 
         textarea {
+            min-height: 100px;
             resize: vertical;
-            min-height: 80px;
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: white;
-            padding: 15px 40px;
             border: none;
             border-radius: 5px;
             font-size: 1.1em;
-            cursor: pointer;
-            width: 100%;
-            transition: transform 0.3s;
             font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .submit-btn:hover {
-            transform: scale(1.02);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
         }
 
-        #map {
-            width: 100%;
-            height: 300px;
-            border-radius: 8px;
-            border: 2px solid #e9ecef;
-            margin-top: 10px;
+        .whatsapp-icon {
+            font-size: 1.3em;
         }
 
         /* Footer */
         footer {
+            background: #2c3e50;
+            color: white;
             text-align: center;
-            padding: 30px;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #25D366;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Floating WhatsApp Buttons */
+        .floating-buttons-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .floating-whatsapp {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .floating-order {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .floating-whatsapp:hover,
+        .floating-order:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-whatsapp:hover {
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .floating-order:hover {
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .floating-whatsapp .icon-float,
+        .floating-order .icon-float {
+            font-size: 2.5em;
+            color: white;
+        }
+
+        .tooltip-text {
+            position: absolute;
+            right: 80px;
             background: #333;
             color: white;
-            margin-top: 40px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            white-space: nowrap;
+            font-size: 0.85em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            max-width: 200px;
+            white-space: normal;
+            text-align: center;
         }
 
-        .whatsapp-icon {
-            display: inline-block;
-            margin-right: 5px;
+        .floating-whatsapp:hover .tooltip-text,
+        .floating-order:hover .tooltip-text {
+            opacity: 1;
         }
 
+        /* Pulsing animation for group button */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        .floating-whatsapp {
+            animation: pulse 2s infinite;
+        }
+
+        /* Mobile responsive */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 2em;
+                font-size: 1.8em;
             }
 
-            section {
-                padding: 20px;
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .floating-buttons-container {
+                bottom: 20px;
+                right: 20px;
+                gap: 12px;
+            }
+            
+            .floating-whatsapp,
+            .floating-order {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .floating-whatsapp .icon-float,
+            .floating-order .icon-float {
+                font-size: 2em;
+            }
+            
+            .tooltip-text {
+                display: none;
             }
         }
     </style>
@@ -267,30 +383,18 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="container">
-            <h1>🍇 Aansh FreshFarm2Home</h1>
-            <p>Premium Red Flame Seedless Grapes - Nashik Export Quality</p>
-            <p style="font-size: 0.9em; margin-top: 10px;">Residue-Free | Farm-Fresh | Direct from Nashik Vineyards</p>
-        </div>
+        <h1>🍇 Aansh FreshFarm2Home</h1>
+        <p>Premium Red Flame Seedless Grapes | Direct from Nashik Vineyards</p>
+        <p style="margin-top: 10px; font-size: 1.1em;">🌿 Residue-Free | Export Quality | Farm Fresh</p>
     </header>
 
     <div class="container">
-        <!-- Product Details -->
+        <!-- Product Information -->
         <section>
-            <h2>Premium Red Flame Seedless Grapes</h2>
-            <div style="text-align: center; margin-bottom: 30px;">
-                <div style="font-size: 4em; margin: 20px 0;">🍇</div>
-                <h3 style="color: #764ba2; font-size: 1.8em; margin-bottom: 15px;">Nashik Export Quality</h3>
-                
-                <!-- Pricing -->
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 10px; max-width: 500px; margin: 20px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                    <p style="font-size: 1.1em; margin-bottom: 10px;">📦 Box Size: Approx. 2 kg</p>
-                    <p style="font-size: 1.3em; text-decoration: line-through; opacity: 0.8; margin-bottom: 5px;">₹800</p>
-                    <p style="font-size: 2.5em; font-weight: bold; margin: 10px 0;">₹599/-</p>
-                    <p style="font-size: 1.2em; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 5px; margin-top: 15px;">🎉 Special Discounted Price!</p>
-                    <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.9;">+ Home Delivery Charges As Applicable</p>
-                </div>
-            </div>
+            <h2>Premium Red Flame Seedless Grapes 🍇</h2>
+            <p style="font-size: 1.1em; text-align: center; color: #555; margin-bottom: 30px;">
+                Experience the authentic taste of Nashik's finest export-quality grapes, delivered fresh to your doorstep
+            </p>
             
             <div class="products">
                 <div class="product-card">
@@ -418,19 +522,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="deliveryDate">Preferred Delivery Date *</label>
-                        <input type="date" id="deliveryDate" name="deliveryDate" required>
+                        <div style="background: linear-gradient(135deg, #e8f5e9 0%, #fff3e0 100%); padding: 20px; border-radius: 8px; border-left: 4px solid #4caf50;">
+                            <h3 style="color: #2e7d32; margin-bottom: 12px; font-size: 1.1em;">📦 How Our Delivery Works</h3>
+                            <p style="line-height: 1.8; color: #333; margin-bottom: 10px;">
+                                🍇 Orders are pooled up to 50 boxes (100 kg) 📦 once or twice a week 🗓️.
+                            </p>
+                            <p style="line-height: 1.8; color: #333; margin-bottom: 10px;">
+                                🌱 After confirmation, fresh grapes are plucked ✂️ directly from Nashik farms 🚜.
+                            </p>
+                            <p style="line-height: 1.8; color: #333;">
+                                📍 Delivery is arranged at <strong>Laxmin Nagar, Chinchwad, Pune</strong> (near Nisarg Misal 🍽️) — pickup 🚶‍♂️ available with no extra transport charges 💰 as per confirmed WhatsApp order 📲.
+                            </p>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="address">Delivery Address *</label>
                         <textarea id="address" name="address" required placeholder="Enter your complete delivery address"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="location">Pin Your Location (Optional)</label>
-                        <input type="text" id="location" name="location" placeholder="Enter address to search on map">
-                        <div id="map"></div>
                     </div>
 
                     <button type="submit" class="submit-btn">
@@ -445,84 +553,64 @@
     <footer>
         <p>&copy; 2024 Aansh FreshFarm2Home | Premium Red Flame Seedless Grapes from Nashik</p>
         <p>Residue-Free | Export Quality | Farm Fresh</p>
-        <p style="margin-top: 10px;">📱 WhatsApp: +91-9923032665 | 📧 Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3daddd5dcf3d2d2ddc0dbd5c1d6c0dbd5d2c1de81dbdcded69dd0dcde">[email&#160;protected]</a></p>
+        <p style="margin-top: 10px;">📱 WhatsApp: +91-9923032665 | 📧 Email: <a href="mailto:aartikucheriya@zohomail.com">aartikucheriya@zohomail.com</a></p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Set minimum date to today
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('deliveryDate').setAttribute('min', today);
+    <!-- Floating Action Buttons -->
+    <div class="floating-buttons-container">
+        <!-- Order Button (Purple) -->
+        <a href="#orderForm" 
+           class="floating-whatsapp floating-order" 
+           aria-label="Place Your Order"
+           onclick="document.getElementById('orderForm').scrollIntoView({behavior: 'smooth'}); return false;">
+            <span class="tooltip-text">Place your order 📦</span>
+            <span class="icon-float">🛒</span>
+        </a>
+        
+        <!-- WhatsApp Group Button (Green) -->
+        <a href="https://chat.whatsapp.com/EmWeOITSlqx9RFxwCXDJDd" 
+           class="floating-whatsapp" 
+           target="_blank"
+           aria-label="Join WhatsApp Group">
+            <span class="tooltip-text">Join WhatsApp group for updates 🍇</span>
+            <span class="icon-float">💬</span>
+        </a>
+    </div>
 
-        // Initialize map
-        let map;
-        let marker;
+    <script>
+    // Handle the Form Submission
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-        function initMap() {
-            // Default location (you can change this to your area)
-            const defaultLocation = { lat: 28.6139, lng: 77.2090 }; // Delhi coordinates
-            
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: defaultLocation,
-                zoom: 12
-            });
+        // Capture data from form
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const boxes = document.getElementById('boxes').value;
+        const address = document.getElementById('address').value;
+        
+        // Calculate total amount based on ₹599 price
+        const totalAmount = boxes * 599;
 
-            marker = new google.maps.Marker({
-                position: defaultLocation,
-                map: map,
-                draggable: true
-            });
+        // Construct WhatsApp message
+        const message = `🍇 *New Order: Aansh FreshFarm2Home*
 
-            // Add search box
-            const input = document.getElementById('location');
-            const searchBox = new google.maps.places.SearchBox(input);
+👤 *Customer:* ${name}
+📱 *Phone:* ${phone}
+📦 *Quantity:* ${boxes} Box(es) (Approx. 2kg each)
+💰 *Total Price:* ₹${totalAmount}/-
+🏠 *Address:* ${address}
 
-            map.addListener('bounds_changed', function() {
-                searchBox.setBounds(map.getBounds());
-            });
+_Sent from Website_`;
 
-            searchBox.addListener('places_changed', function() {
-                const places = searchBox.getPlaces();
-                if (places.length == 0) return;
-
-                const place = places[0];
-                if (!place.geometry || !place.geometry.location) return;
-
-                map.setCenter(place.geometry.location);
-                marker.setPosition(place.geometry.location);
-                map.setZoom(15);
-            });
-        }
-
-        // Form submission
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const boxes = document.getElementById('boxes').value;
-            const deliveryDate = document.getElementById('deliveryDate').value;
-            const address = document.getElementById('address').value;
-
-            let locationInfo = '';
-            if (marker) {
-                const lat = marker.getPosition().lat();
-                const lng = marker.getPosition().lng();
-                locationInfo = `\n📍 Location: https://www.google.com/maps?q=${lat},${lng}`;
-            }
-
-            const totalAmount = boxes * 599;
-
-            const message = `🍇 *New Order - Aansh FreshFarm2Home*\n\n` +
-                          `*Product:* Red Flame Seedless Grapes (Nashik Export Quality)\n` +
-                          `*Residue-Free | Premium Grade*\n\n` +
-                          `👤 Name: ${name}\n` +
-                          `📱 Phone: ${phone}\n` +
-                          `📦 Boxes: ${boxes} (@ 2kg per box)\n` +
-                          `💰 Price: ₹${totalAmount}/- (₹599 per box)\n` +
-                          `📅 Delivery Date: ${deliveryDate}\n` +
-                          `🏠 Address: ${address}${locationInfo}\n\n` +
-                          `_*Note:* Home delivery charges as applicable_`;
-
-            // Replace with your WhatsApp number (include country code without +)
-            const whatsappNumber = '919923032665'; // Aansh FreshFarm2Home WhatsApp
-    
+        // WhatsApp Number
+        const whatsappNumber = '919923032665'; 
+        
+        // Create WhatsApp URL
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+        
+        // Open WhatsApp
+        window.open(whatsappUrl, '_blank');
+    });
+</script>
+</body>
+</html>
